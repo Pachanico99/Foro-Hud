@@ -1,10 +1,10 @@
 package com.challenge.api.model.topic;
 
-public enum STATUS {
+public enum TOPIC_STATUS {
     OPEN,
-    CLOSE,
     RESOLVED,
+    DELETE,
+    CLOSE,
     ON_HOLD,
-    PROTECTED,
-    DELETE
+    PROTECTED
 }
