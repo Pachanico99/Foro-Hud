@@ -26,5 +26,5 @@ public interface TopicRepository extends JpaRepository<Topic,Long> {
            \s""")
     Page<Topic> findAllVisibleTopics(Pageable pagination);
 
-    Page<Topic> findByStatusPROTECTED(Pageable pagination);
+    Page<Topic> findByStatus(String status, Pageable pagination);
 }

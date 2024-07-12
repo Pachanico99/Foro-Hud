@@ -83,4 +83,8 @@ public class TopicService {
 
         return topic.get();
     }
+
+    public Page<Topic> findByStatus(TOPIC_STATUS status, Pageable pagination){
+        return topicRepository.findByStatus(status.toString(), pagination);
+    }
 }

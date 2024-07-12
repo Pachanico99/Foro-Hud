@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Table(name = "profiles")
+@Table(name = "users_profiles", uniqueConstraints = {@UniqueConstraint(columnNames = {"userName"})})
 @Entity(name = "Profile")
 @Getter
 @NoArgsConstructor
@@ -24,10 +24,13 @@ public class Profile {
     @Column(unique = true, nullable = false)
     private String userName;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "profile", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private User user;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Topic> topics;
+
+    public Profile(String userName){
+        this.userName = userName;
+    }
 }
