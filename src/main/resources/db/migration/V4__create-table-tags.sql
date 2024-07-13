@@ -1,0 +1,5 @@
+CREATE TABLE tags (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    tag_name VARCHAR(100) NOT NULL UNIQUE,
+    tag_description TEXT NOT NULL
+);

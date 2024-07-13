@@ -1,0 +1,4 @@
+CREATE TABLE users_profiles (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(255) UNIQUE NOT NULL
+);
