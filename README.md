@@ -1,36 +1,46 @@
-FORO-HUD
+# FORO-HUD
 Es un challenge de Oracle-Next-Generation Alura-Latam. Se trata de un foro (en este caso busque uno relacionado con StackOverFlow) implementado una ApiRest, permitiendo a los usuarios crear tópicos, responder a los mismos y participar en discusiones.
 
-Caracteristicas.
-. Registro y autenticacion de usuarios, con un nombre de usuario y contraseña.
-. CRUD de topicos.
-. Autenticacion por JWT.
+---
 
-Tecnologias.
-. Java
-. Sprint Boot
-. Depencias con Spring Initializr(https://start.spring.io/):
- - Lombok
- - Spring Web
- - Spring Boot DevTools
- - Spring Data JPA
- - Flyway Migration
- - MySQL Driver
- - Validation
- - Spring Security
- - Auth (https://github.com/auth0/java-jwt).
-. MySQL
-. Insomnia
-. IDE usado -> Intellij
+## Caracteristicas.
+- Registro y autenticacion de usuarios, con un nombre de usuario y contraseña.
+- CRUD de topicos.
+- Autenticacion por JWT.
 
-Instalación
+---
+
+## Tecnologias.
+- Java
+- Sprint Boot
+- Depencias con Spring Initializr (https://start.spring.io/):
+  - Lombok
+  - Spring Web
+  - Spring Boot DevTools
+  - Spring Data JPA
+  - Flyway Migration
+  - MySQL Driver
+  - Validation
+  - Spring Security
+  - Auth (https://github.com/auth0/java-jwt).
+- MySQL
+- Insomnia
+- IDE usado -> Intellij
+
+---
+
+## Instalación
+
 Clona este repositorio:
 
+```bash
 git clone master https://github.com/Pachanico99/Foro-Hud.git
+```
 
 Abre el proyecto en tu de preferencia IDE.
 
 Abre el archivo application.yml y configuralo con tus credencias de mysql o la base de datos que uses.
+
 ```yml
 spring:
   datasource:
@@ -45,14 +55,16 @@ spring:
 server:
   error:
     include-stacktrace: never
-  port: 8081
+  port: {Ingresa el puerto que desees usar}
 
 api:
   security:
     secret: ${JWT_SECRET:INGRESA UNA KEY}yml
 ```
 
-Pruebas:
+---
+
+## Pruebas:
 Registrarse:
 Caso OK
 ![image](https://github.com/user-attachments/assets/2e223748-4437-4755-aad5-6f2f9f055d2e)
@@ -86,11 +98,10 @@ Modificar TOPICO:
 Eliminar TOPICO:
 ![image](https://github.com/user-attachments/assets/c63ae35d-0c24-40fd-a498-42a4a14993b2)
 
-FUTURAS IMPLEMENTACIONES (Apartir de  18/07):
- - Implementar la entidad respuestas
- - Implementar la entidad voto (para tener un sistema de popularidad en los topicos que aportan mucho)
- - Implementar un errorhandler para manejar los errores y personalizarlos.
- - Implementar el crud para usuario, respuestas y voto.
+---
+
+## FUTURAS IMPLEMENTACIONES:
+ - Implementar el crud para usuario, respuestas.
  - Implementar test unitarios.
  - Implementar swangger para documentar.
 
