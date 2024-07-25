@@ -1,5 +1,6 @@
 package com.challenge.api.domain.topic;
 
+import com.challenge.api.domain.answer.Answer;
 import com.challenge.api.domain.profile.Profile;
 import com.challenge.api.domain.tag.Tag;
 import jakarta.persistence.*;
@@ -28,9 +29,12 @@ public class Topic {
 
     private LocalDateTime creationDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id", nullable = false)
     private Profile author;
+
+    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Answer> answers;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(

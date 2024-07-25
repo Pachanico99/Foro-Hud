@@ -9,22 +9,23 @@ import java.util.Optional;
 
 public interface TopicRepository extends JpaRepository<Topic,Long> {
     @Query("""
-            SELECT t FROM Topic t WHERE t.title = :title\s
+            SELECT t FROM Topic t WHERE t.title = :title
             AND t.status NOT IN ('DELETE', 'CLOSE', 'PROTECTED')
-           \s""")
+           """)
     Optional<Topic> findTopicByTitle(String title);
 
     @Query("""
-            SELECT t FROM Topic t WHERE t.message = :message\s
+            SELECT t FROM Topic t WHERE t.message = :message
             AND t.status NOT IN ('DELETE', 'CLOSE', 'PROTECTED')
-           \s""")
+           """)
     Optional<Topic> findTopicByMessage(String message);
 
     @Query("""
-            SELECT t FROM Topic t WHERE t.status NOT IN\s
-            ('DELETE', 'CLOSE', 'PROTECTED')
-           \s""")
-    Page<Topic> findAllVisibleTopics(Pageable pagination);
+            SELECT t FROM Topic t 
+            WHERE LOWER(t.message) = LOWER(:message)
+            AND t.status NOT IN ('DELETE', 'CLOSE', 'PROTECTED')
+       """)
+    Optional<Page<Topic>> findAllVisibleTopics(Pageable pagination);
 
-    Page<Topic> findByStatus(String status, Pageable pagination);
+    Optional<Page<Topic>> findByStatus(String status, Pageable pagination);
 }

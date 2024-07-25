@@ -11,11 +11,11 @@ public class UnrepeatedMessage implements TopicValidator{
     @Autowired
     private TopicRepository topicRepository;
 
-    public void validate(RegisterTopicDTO registerTopicDTO)  {
+    public void validate(RegisterTopicDTO registerTopicDTO) throws ValidationException {
         var unrepeatedTitle = topicRepository.findTopicByMessage(registerTopicDTO.message());
 
         if(unrepeatedTitle.isPresent()){
-            throw new ValidationException("It is not allowed to enter titles, which already exist.");
+            throw new ValidationException("It is not allowed to enter messages, which already exist.");
         }
     }
 }

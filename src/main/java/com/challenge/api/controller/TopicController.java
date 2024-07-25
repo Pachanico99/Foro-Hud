@@ -1,6 +1,7 @@
 package com.challenge.api.controller;
 
 import com.challenge.api.domain.topic.*;
+import com.challenge.api.infra.errors.PageEmptyException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,7 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/topicos")
+@RequestMapping("/topics")
 public class TopicController {
     @Autowired
     private TopicService topicService;
@@ -33,13 +34,13 @@ public class TopicController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ListTopicDTO>> listTopics(@PageableDefault(size = 2) Pageable pagination){
+    public ResponseEntity<Page<ListTopicDTO>> listTopics(@PageableDefault(size = 2) Pageable pagination) throws PageEmptyException {
         return ResponseEntity.ok(topicService.findAllTopics(pagination).map(ListTopicDTO::new));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ReplyTopicDTO> getTopic(@PathVariable Long id) {
-        Topic topic = topicService.findTopicById(id);
+        Topic topic = topicService.findById(id);
 
         var replyTopicDTO = new ReplyTopicDTO(topic);
 
@@ -54,8 +55,8 @@ public class TopicController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity deleteTopic(@PathVariable Long id) {
-        Topic topic  = topicService.findTopicById(id);
+    public ResponseEntity<Void> deleteTopic(@PathVariable Long id) {
+        var topic  = topicService.findById(id);
 
         topic.deleteTopic();
 

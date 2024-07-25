@@ -9,10 +9,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
-#
-#
-#
-#
+
 server:
   error:
     include-stacktrace: never
@@ -20,4 +17,4 @@ server:
 
 api:
   security:
-    secret: ${JWT_SECRET:123456}
+    secret: ${JWT_SECRET:586E3277255738782FA13F4428472B4B4625065563566B597073373676397924}

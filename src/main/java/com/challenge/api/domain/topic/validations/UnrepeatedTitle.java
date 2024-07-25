@@ -11,7 +11,7 @@ public class UnrepeatedTitle implements TopicValidator{
     @Autowired
     private TopicRepository topicRepository;
 
-    public void validate(RegisterTopicDTO registerTopicDTO)  {
+    public void validate(RegisterTopicDTO registerTopicDTO) throws ValidationException {
         var unrepeatedTitle = topicRepository.findTopicByTitle(registerTopicDTO.title());
 
         if(unrepeatedTitle.isPresent()){

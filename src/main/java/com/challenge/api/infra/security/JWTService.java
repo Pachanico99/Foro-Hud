@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import org.springframework.beans.factory.annotation.Value;
 
 @Service
 public class JWTService {
@@ -39,9 +40,9 @@ public class JWTService {
         }
     }
 
-    public String getSubject(String token) {
+    public String getSubject(String token) throws JWTVerificationException {
         if (token == null) {
-            throw new RuntimeException("Token is not valid.");
+            throw new JWTVerificationException("Token is not valid.");
         }
 
         DecodedJWT decodedJWT;
@@ -54,13 +55,14 @@ public class JWTService {
                     .verify(token);
 
             String subject = decodedJWT.getSubject();
+
             if (subject == null) {
                 throw new RuntimeException("Invalid token: subject is null.");
             }
 
             return subject;
         } catch (JWTVerificationException exception) {
-            throw new RuntimeException("Token verification failed", exception);
+            throw new JWTVerificationException("Token verification failed", exception);
         }
     }
 
@@ -73,13 +75,13 @@ public class JWTService {
         return getClaim(token, DecodedJWT::getExpiresAt).before(new Date());
     }
 
-    private DecodedJWT getAllClaims(String token) {
+    private DecodedJWT getAllClaims(String token) throws JWTVerificationException{
         try {
             Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
             JWTVerifier verifier = JWT.require(algorithm).build();
             return verifier.verify(token);
         } catch (JWTVerificationException e) {
-            throw new RuntimeException("Failed to get claims from token", e);
+            throw new JWTVerificationException("Failed to get claims from token", e);
         }
     }
 

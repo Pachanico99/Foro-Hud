@@ -1,5 +1,6 @@
 package com.challenge.api.domain.profile;
 
+import com.challenge.api.domain.answer.Answer;
 import com.challenge.api.domain.topic.Topic;
 import com.challenge.api.domain.user.User;
 import jakarta.persistence.*;
@@ -29,6 +30,9 @@ public class Profile {
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Topic> topics;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Answer> answers;
 
     public Profile(String userName){
         this.userName = userName;
